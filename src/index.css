@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.activeLink{
+    font-weight: 600;
+}
+
+.taskList::-webkit-scrollbar {
+    width: 0px;
+}
+
+.text::-webkit-scrollbar {
+    width: 0px;
+}
+
+.notelist::-webkit-scrollbar {
+    width: 0px;
+}
+
+.notelist{
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
