@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import { IoMdArchive } from "react-icons/io";
 
 const Notes = () => {
 
@@ -60,9 +61,12 @@ const Notes = () => {
     }
   }
 
-  const deleteNote = (id) => {
-    let newNotes = notes.filter((item) => item.id !== id)
-    setNotes(newNotes)
+  const deleteNote = (id, title) => {
+    let okay = confirm(`Are you sure you want to delete "${title}"`)
+    if (okay) {
+      let newNotes = notes.filter((item) => item.id !== id)
+      setNotes(newNotes)
+    }
   }
 
   const editNote = (id) => {
@@ -105,8 +109,9 @@ const Notes = () => {
                     <div className="px-3 flex justify-between items-center">
                       <small>{item.date}</small>
                       <div className="btns flex gap-1">
+                        <span  className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><IoMdArchive /></span>
                         <span onClick={() => editNote(item.id)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><FaEdit /></span>
-                        <span onClick={() => deleteNote(item.id)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><MdDelete /></span>
+                        <span onClick={() => deleteNote(item.id,  item.title)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><MdDelete /></span>
                       </div>
                     </div>
                   </div>

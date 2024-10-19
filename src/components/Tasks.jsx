@@ -30,13 +30,15 @@ const Tasks = () => {
     }
 
     const handleEdit = (e, id) => {
-        let t = todos.filter(i => i.id === id)
-        setTodo(t[0].todo)
-        let newTodos = todos.filter(item => {
-            return item.id !== id
-        })
-        setTodos(newTodos)
-        localStorage.setItem("tasks", JSON.stringify(todos))
+        if (todo.length == 0) {
+            let t = todos.filter(i => i.id === id)
+            setTodo(t[0].todo)
+            let newTodos = todos.filter(item => {
+                return item.id !== id
+            })
+            setTodos(newTodos)
+            localStorage.setItem("tasks", JSON.stringify(todos))
+        }
     }
 
     const handleDelete = (e, id) => {
@@ -81,7 +83,7 @@ const Tasks = () => {
 
     return (
         <div className={`bg-purple-200 w-full px-10 py-7 min-h-[calc(100vh-57px)] flex flex-col justify-between`}>
-            <div className="tasks ">
+            <div className="canvas">
                 <h2 className='text-xl font-bold'>Your Tasks</h2>
                 <hr className='bg-slate-500 h-[2px] my-3' />
                 <input type="checkbox" onChange={toggleFinished} checked={showFinished} /> Show finished

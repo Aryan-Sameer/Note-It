@@ -3,6 +3,8 @@ import Tasks from './components/Tasks'
 import Menubar from './components/Menubar'
 import Notes from './components/Notes'
 import Clock from './components/Clock'
+import Events from './components/Events'
+import Archive from './components/Archive'
 
 function App() {
 
@@ -18,6 +20,14 @@ function App() {
         {
             path: "/Clock",
             element: <><Menubar /><Clock /></>
+        },
+        {
+            path: "/Events",
+            element: <><Menubar /><Events /></>
+        },
+        {
+            path: "/Archive",
+            element: <><Menubar /><Archive /></>
         },
     ])
 

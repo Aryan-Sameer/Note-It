@@ -21,3 +21,9 @@
 .notelist{
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
+
+@media (max-width: 1024px){
+    .menulist li, .menulist .hamburger{
+        font-size: 26px;
+    }
+}

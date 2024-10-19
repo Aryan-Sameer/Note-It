@@ -50,7 +50,7 @@ const StopWatch = () => {
     }
 
     return (
-        <div className='stopWatch bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-[6px]'>
+        <div className='stopWatch bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-4'>
             <div className="inputContainer flex flex-col items-center justify-between h-full">
                 <div className="display flex gap-10">
                     <div className='text-4xl text-white flex justify-between gap-2'>{formatTime().map((item, index) => {

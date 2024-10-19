@@ -99,7 +99,7 @@ const Timer = () => {
 
 
     return (
-        <div className="Timer bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-[6px]">
+        <div className="Timer bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-4">
             {!isStart && <div className="inputContainer flex flex-col items-center justify-between h-full">
                 <div className="inputBox flex gap-10">
                     <input onChange={handleInput} id='days' className='h-16 w-16 text-center outline-none rounded-lg' type="text" placeholder='DD' />
