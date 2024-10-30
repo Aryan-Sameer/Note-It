@@ -18,7 +18,11 @@
     width: 0px;
 }
 
-.notelist{
+.archivelist::-webkit-scrollbar {
+    width: 0px;
+}
+
+.notelist, .archivelist{
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 }
 

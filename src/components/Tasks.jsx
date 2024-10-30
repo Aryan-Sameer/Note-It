@@ -88,7 +88,7 @@ const Tasks = () => {
                 <hr className='bg-slate-500 h-[2px] my-3' />
                 <input type="checkbox" onChange={toggleFinished} checked={showFinished} /> Show finished
                 <div className="taskList overflow-y-auto xl:h-[66vh] lg:h-[71vh] md:h-[73vh] sm:h-[87vh]">
-                    {todos.length == 0 && <div className='my-5 font-bold text-slate-500 text-lg'>No tasks to display!</div>}
+                    {todos.length == 0 && <div className='my-5 font-bold text-slate-600 text-lg'>No tasks to display!</div>}
                     {todos.map(item => {
                         return ((showFinished || !item.isComplete) &&
                             <div key={item.id} className="task flex justify-between rounded-md my-2 bg-white">

@@ -23,11 +23,24 @@ const Notes = () => {
     initNote = JSON.parse(localStorage.getItem("notesData"))
   }
 
+  let initArchive
+  if (localStorage.getItem("archivedNotes") === null) {
+    initArchive = []
+  }
+  else {
+    initArchive = JSON.parse(localStorage.getItem("archivedNotes"))
+  }
+
   const [notes, setNotes] = useState(initNote)
+  const [archive, setArchive] = useState(initArchive)
 
   useEffect(() => {
     localStorage.setItem("notesData", JSON.stringify(notes))
   }, [notes])
+
+  useEffect(() => {
+    localStorage.setItem("archivedNotes", JSON.stringify(archive))
+  }, [archive])
 
 
   const handleNoteText = (event) => {
@@ -77,6 +90,20 @@ const Notes = () => {
     setNotes(newNotes)
   }
 
+  const archiveNote = (note) => {
+    let date = new Date()
+    let newNotes = notes.filter((item) => item.id !== note.id)
+    setNotes(newNotes)
+
+    let newNote = {
+      id: note.id,
+      title: note.title,
+      text: note.text,
+      date: date.toLocaleDateString()
+    }
+    setArchive([...archive, newNote])
+  }
+
   return (
     <div className={`bg-purple-200 w-full px-10 py-7 min-h-[calc(100vh-57px)] flex flex-col justify-between`}>
       <div className="canvas">
@@ -109,7 +136,7 @@ const Notes = () => {
                     <div className="px-3 flex justify-between items-center">
                       <small>{item.date}</small>
                       <div className="btns flex gap-1">
-                        <span  className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><IoMdArchive /></span>
+                        <span onClick={() => archiveNote(item)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><IoMdArchive /></span>
                         <span onClick={() => editNote(item.id)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><FaEdit /></span>
                         <span onClick={() => deleteNote(item.id,  item.title)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><MdDelete /></span>
                       </div>

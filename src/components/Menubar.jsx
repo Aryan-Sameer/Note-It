@@ -1,20 +1,26 @@
 import React from 'react'
 import { FaCheckCircle } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
-import { FaCircleHalfStroke } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa6";
 import { NavLink } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from 'react';
 import { IoMdArchive } from "react-icons/io";
 import { FaCalendarAlt } from "react-icons/fa";
+import { FaSun } from "react-icons/fa6";
+import { FaMoon } from "react-icons/fa";
 
 const Menubar = () => {
 
   const [menuBar, setMenuBar] = useState(false)
+  const [darkMode, setDarkMode] = useState(false)
 
   const openMenu = () => {
     setMenuBar(!menuBar)
+  }
+
+  const handleMode = () => {
+    setDarkMode(!darkMode)
   }
 
   return (
@@ -30,7 +36,7 @@ const Menubar = () => {
           </div>
           <div className="second flex flex-col gap-5 justify-between">
             <NavLink className={(e) => {return e.isActive? "activeLink": ""}} to="/Archive"><li className='flex items-center gap-3 text-xl cursor-pointer'><IoMdArchive /><span className={`link lg:block ${menuBar?"block":"hidden"}`}>Archive</span></li></NavLink>
-            <li className='flex items-center gap-3 text-xl text-bold cursor-pointer'><FaCircleHalfStroke /><span className={`link lg:block ${menuBar?"block":"hidden"}`}>Theme</span></li>
+            <li onClick={handleMode} className='flex items-center gap-3 text-xl text-bold cursor-pointer select-none'>{darkMode? <FaMoon /> : <FaSun />}<span className={`link lg:block ${menuBar?"block":"hidden"}`}>Theme</span></li>
           </div>
         </ul>
       </div>
