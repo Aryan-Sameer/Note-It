@@ -50,7 +50,7 @@ const StopWatch = () => {
     }
 
     return (
-        <div className='stopWatch bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-4'>
+        <div className='stopWatch bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-4 dark:bg-neutral-800 dark:border-neutral-900'>
             <div className="inputContainer flex flex-col items-center justify-between h-full">
                 <div className="display flex gap-10">
                     <div className='text-4xl text-white flex justify-between gap-2'>{formatTime().map((item, index) => {
@@ -60,9 +60,9 @@ const StopWatch = () => {
                     })}</div>
                 </div>
                 <div className="controls flex justify-between w-full gap-1">
-                    <button onClick={start} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full'>Start</button>
-                    <button onClick={stop} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full'>Stop</button>
-                    <button onClick={reset} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full'>Reset</button>
+                    <button onClick={start} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>Start</button>
+                    <button onClick={stop} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>Stop</button>
+                    <button onClick={reset} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>Reset</button>
                 </div>
             </div>
         </div>

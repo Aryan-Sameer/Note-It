@@ -22,8 +22,43 @@
     width: 0px;
 }
 
+.eventText::-webkit-scrollbar {
+    width: 0px;
+}
+
+.events::-webkit-scrollbar {
+    width: 0px;
+}
+
 .notelist, .archivelist{
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.weekDays span, .dates span {
+    display: inline-block;
+    width: calc(100% / 7);
+    margin: 0 auto;
+}
+
+.dates span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dates span {
+    cursor: pointer;
+}
+
+.today {
+    font-size: 1.5rem;
+    line-height: 0%;
+    font-weight: bolder;
+}
+
+.timeInput input[type = "number"]::-webkit-outer-spin-button,
+.timeInput input[type = "number"]::-webkit-inner-spin-button{
+    appearance: none;
 }
 
 @media (max-width: 1024px){

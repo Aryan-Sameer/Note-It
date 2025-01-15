@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import { IoThumbsDown } from 'react-icons/io5'
 
 const Timer = () => {
 
@@ -26,6 +27,7 @@ const Timer = () => {
         setMinutes(0)
         setSeconds(0)
         clearInterval(timerId)
+        setLapArray([])
     }
 
     const handlePause = () => {
@@ -80,6 +82,7 @@ const Timer = () => {
         if (d == 0 && h == 0 && m == 0 && s == 0) {
             handleReset()
             alert("Time Up!!!")
+            setLapArray([])
         }
     }
 
@@ -97,17 +100,16 @@ const Timer = () => {
         }
     }, [tid, days, hours, minutes, seconds, isStart])
 
-
     return (
-        <div className="Timer bg-purple-400 w-[430px] p-4 rounded-lg h-40 border-purple-500 border-4">
+        <div className="Timer bg-purple-400 w-[430px] p-4 rounded-lg  border-purple-500 border-4 dark:bg-neutral-800 dark:border-neutral-900">
             {!isStart && <div className="inputContainer flex flex-col items-center justify-between h-full">
                 <div className="inputBox flex gap-10">
-                    <input onChange={handleInput} id='days' className='h-16 w-16 text-center outline-none rounded-lg' type="text" placeholder='DD' />
-                    <input onChange={handleInput} id='hours' className='h-16 w-16 text-center outline-none rounded-lg' type="text" placeholder='HH' />
-                    <input onChange={handleInput} id='minutes' className='h-16 w-16 text-center outline-none rounded-lg' type="text" placeholder='MM' />
-                    <input onChange={handleInput} id='seconds' className='h-16 w-16 text-center outline-none rounded-lg' type="text" placeholder='SS' />
+                    <input onChange={handleInput} id='days' className='h-16 w-16 text-center outline-none rounded-lg dark:bg-neutral-300' type="text" placeholder='DD' />
+                    <input onChange={handleInput} id='hours' className='h-16 w-16 text-center outline-none rounded-lg dark:bg-neutral-300' type="text" placeholder='HH' />
+                    <input onChange={handleInput} id='minutes' className='h-16 w-16 text-center outline-none rounded-lg dark:bg-neutral-300' type="text" placeholder='MM' />
+                    <input onChange={handleInput} id='seconds' className='h-16 w-16 text-center outline-none rounded-lg dark:bg-neutral-300' type="text" placeholder='SS' />
                 </div>
-                <button onClick={handleStart} disabled={days == 0 && hours == 0 && minutes == 0 && seconds == 0} className='disabled:bg-purple-500 p-1 bg-purple-600 mt-3 text-white hover:bg-purple-700 rounded-lg w-full'>Start timer</button>
+                <button onClick={handleStart} disabled={days == 0 && hours == 0 && minutes == 0 && seconds == 0} className='disabled:bg-purple-500 p-1 bg-purple-600 mt-3 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>Start timer</button>
             </div>}
 
             {isStart && <div className="showContainer flex flex-col items-center justify-between h-full">
@@ -127,8 +129,8 @@ const Timer = () => {
                         } else {
                             return handlePause(e)
                         }
-                    }} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full'>{isPaused ? `Resume` : `Stop`}</button>
-                    <button onClick={handleReset} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full'>Reset</button>
+                    }} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>{isPaused ? `Resume` : `Stop`}</button>
+                    <button onClick={handleReset} className='p-1 bg-purple-600 text-white hover:bg-purple-700 rounded-lg w-full dark:bg-neutral-900 dark:hover:bg-neutral-950'>Reset</button>
                 </div>
             </div>}
         </div>

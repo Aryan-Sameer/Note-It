@@ -5,6 +5,7 @@ import { MdDelete } from "react-icons/md";
 import { FaEdit } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import { IoMdArchive } from "react-icons/io";
+import { FaCopy } from "react-icons/fa6";
 
 const Notes = () => {
 
@@ -12,8 +13,8 @@ const Notes = () => {
   const [noteTitle, setNoteTitle] = useState("")
   const [searchText, setSearchText] = useState("")
 
-  const charLimit = 250
-  const titleLimit = 20
+  const charLimit = 300
+  const titleLimit = 25
 
   let initNote
   if (localStorage.getItem("notesData") === null) {
@@ -41,7 +42,6 @@ const Notes = () => {
   useEffect(() => {
     localStorage.setItem("archivedNotes", JSON.stringify(archive))
   }, [archive])
-
 
   const handleNoteText = (event) => {
     if (charLimit - event.target.value.length >= 0) {
@@ -104,52 +104,58 @@ const Notes = () => {
     setArchive([...archive, newNote])
   }
 
+  const copyNote = (text) => {
+    navigator.clipboard.writeText(text)
+    alert("Note copied to clipboard")
+  }
+
   return (
-    <div className={`bg-purple-200 w-full px-10 py-7 min-h-[calc(100vh-57px)] flex flex-col justify-between`}>
+    <div className={`bg-purple-200 w-full px-10 py-7 min-h-[calc(100vh-57px)] flex flex-col justify-between dark:bg-neutral-700`}>
       <div className="canvas">
-        <h2 className='text-xl font-bold'>Your Notes</h2>
-        <hr className='bg-slate-500 h-[2px] my-3' />
+        <h2 className='text-xl font-bold dark:text-white'>Your Notes</h2>
+        <hr className='bg-slate-500 border-slate-400 h-[2px] my-3 dark:border-2 dark:border-neutral-600' />
         <div className="notelist grid gap-4 overflow-y-auto xl:h-[68vh] lg:h-[73vh] md:h-[75vh] sm:h-[90vh]">
-          <div className='note bg-purple-400 min-h-[300px] max-h-[300px] rounded-lg flex flex-col justify-between overflow-hidden'>
+          <section className='note bg-purple-400 min-h-[300px] max-h-[300px] rounded-lg flex flex-col justify-between overflow-hidden dark:bg-neutral-800'>
             <div className="content h-full">
-              <input onChange={handleNoteTitle} className="title font-bold py-1 px-3 bg-purple-500 w-full placeholder-white focus:outline-none" value={noteTitle} placeholder='Add title' />
-              <textarea onChange={handleNoteText} className='text px-3 py-2 w-full h-[calc(100%-32px)] bg-purple-400 placeholder-white focus:outline-none resize-none' value={noteText} placeholder='Type to add a new note'></textarea>
+              <input onChange={handleNoteTitle} className="title font-bold py-1 px-3 bg-purple-500 w-full placeholder-white focus:outline-none dark:bg-neutral-900 dark:text-white" value={noteTitle} placeholder='Add title' />
+              <textarea onChange={handleNoteText} className='text px-3 py-2 w-full h-[calc(100%-32px)] bg-purple-400 placeholder-white focus:outline-none resize-none dark:bg-neutral-800 dark:text-white' value={noteText} placeholder='Type to add a new note'></textarea>
             </div>
             <div className="noteFooter flex flex-col">
-              <hr className='bg-purple-500 h-[1.5px] border-0' />
+              <hr className='bg-purple-500 h-[1.5px] border-0 dark:bg-neutral-700' />
               <div className="px-3 flex justify-between items-center">
-                <small className={noteText.length >= 240 ? "text-red-500" : "text-white"}>{charLimit - noteText.length} remaining</small>
-                <button onClick={AddNote} disabled={noteText.length <= 8 || noteTitle.length <= 3} className='bg-purple-600 disabled:bg-purple-500 hover:bg-purple-600  px-[6px] my-[6px] rounded-md cursor-pointer text-white'>Add</button>
+                <small className={noteText.length >= 280 ? "text-red-500" : "text-white"}>{charLimit - noteText.length} remaining</small>
+                <button onClick={AddNote} disabled={noteText.length <= 8 || noteTitle.length <= 3} className='bg-purple-600 disabled:bg-purple-500 hover:bg-purple-600  px-[6px] my-[6px] rounded-md cursor-pointer text-white dark:bg-neutral-900'>Add</button>
               </div>
             </div>
-          </div>
+          </section>
           {
             notes.filter((item) => item.title.toLowerCase().includes(searchText.toLocaleLowerCase())).map((item) => {
               return (
-                <div key={item.id} className='note bg-purple-400 min-h-[300px] max-h-[300px] rounded-lg flex flex-col justify-between overflow-hidden'>
+                <section key={item.id} className='note bg-purple-400 min-h-[300px] max-h-[300px] rounded-lg flex flex-col justify-between overflow-hidden dark:bg-neutral-800 dark:text-white'>
                   <div className="content">
-                    <h2 className="title font-bold py-1 px-3 bg-purple-500">{item.title}</h2>
+                    <h2 className="title font-bold py-1 px-3 bg-purple-500 dark:bg-neutral-900">{item.title}</h2>
                     <div className='text py-2 px-3 max-h-[232px] overflow-y-auto whitespace-pre-wrap break-words'>{item.text}</div>
                   </div>
                   <div className="noteFooter flex flex-col">
-                    <hr className='bg-purple-500 h-[1.5px] border-0' />
+                    <hr className='bg-purple-500 h-[1.5px] border-0 dark:bg-neutral-700' />
                     <div className="px-3 flex justify-between items-center">
                       <small>{item.date}</small>
                       <div className="btns flex gap-1">
-                        <span onClick={() => archiveNote(item)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><IoMdArchive /></span>
-                        <span onClick={() => editNote(item.id)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><FaEdit /></span>
-                        <span onClick={() => deleteNote(item.id,  item.title)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer'><MdDelete /></span>
+                        <span onClick={() => copyNote(item.text)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer dark:hover:bg-neutral-900'><FaCopy /></span>
+                        <span onClick={() => archiveNote(item)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer dark:hover:bg-neutral-900'><IoMdArchive /></span>
+                        <span onClick={() => editNote(item.id)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer dark:hover:bg-neutral-900'><FaEdit /></span>
+                        <span onClick={() => deleteNote(item.id,  item.title)} className='hover:bg-purple-500 p-[6px] my-1 rounded-[50%] cursor-pointer dark:hover:bg-neutral-900'><MdDelete /></span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </section>
               )
             })
           }
         </div>
       </div>
-      <div className="search flex items-center bg-white rounded-md">
-        <input onChange={handleSearch} className='py-1 px-1 w-[100%] rounded-md text-lg text-slate-700 focus:outline-none' type="text" placeholder='Type to search a note' />
+      <div className="search flex items-center bg-white rounded-md dark:bg-neutral-300">
+        <input onChange={handleSearch} className='py-1 px-1 w-[100%] rounded-md text-lg text-slate-700 focus:outline-none dark:bg-neutral-300 dark:text-slate-900' type="text" placeholder='Type to search a note' />
         <span className="searchIcon py-2 px-3"><FaSearch /></span>
       </div>
     </div>
