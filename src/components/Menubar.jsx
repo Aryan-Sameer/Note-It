@@ -19,7 +19,7 @@ const Menubar = () => {
   }
 
   return (
-    <main className={`bg-purple-400 py-7 px-5 flex flex-col justify-between xl:w-[15%] md:w-[min-content] dark:bg-neutral-800`}>
+    <aside className={`bg-purple-400 py-7 px-5 flex flex-col justify-between xl:w-[15%] md:w-[min-content] dark:bg-neutral-800`}>
       <div className='menulist flex flex-col justify-between h-full'>
         <section className="first flex flex-col gap-5 justify-between dark:text-neutral-300">
           <NavLink className={(e) => { return e.isActive ? "activeLink" : "" }} to="/"><span className='flex items-center gap-3 text-xl cursor-pointer'><FaCheckCircle /><span className={`link lg:block hidden`}> Tasks</span></span></NavLink>
@@ -36,7 +36,7 @@ const Menubar = () => {
           <span onClick={handleMode} className='flex items-center gap-3 text-xl text-bold cursor-pointer select-none'>{darkMode ? <FaMoon /> : <FaSun />}<span className={`link lg:block hidden`}>Theme</span></span>
         </section>
       </div>
-    </main>
+    </aside>
   )
 }
 

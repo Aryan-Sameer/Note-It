@@ -14,11 +14,11 @@
     width: 0px;
 }
 
-.notelist::-webkit-scrollbar {
+.notes::-webkit-scrollbar {
     width: 0px;
 }
 
-.archivelist::-webkit-scrollbar {
+.archives::-webkit-scrollbar {
     width: 0px;
 }
 

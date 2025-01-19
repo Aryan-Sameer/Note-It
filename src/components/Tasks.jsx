@@ -89,41 +89,45 @@ const Tasks = () => {
     }
 
     return (
-        <div className={`bg-purple-200 w-full px-10 py-7 min-h-[calc(100vh-57px)] flex flex-col justify-between dark:bg-neutral-700`}>
-            <div className="canvas">
-                <h2 className='text-xl font-bold dark:text-white'>Your Tasks</h2>
-                <hr className='bg-slate-500 border-slate-400 h-[2px] my-3 dark:border-2 dark:border-neutral-600' />
-                {!(todos.length === 0) && <div>
-                    <input type="checkbox" onChange={toggleFinished} checked={showFinished} /> <span className='dark:text-white'>Show finished</span>
-                    <span className='border-2 border-purple-400 mx-3 dark:border-neutral-800'></span>
-                    <input type="checkbox" onChange={toggleImportant} checked={showImportant} /> <span className='dark:text-white'>Show only important</span>
-                </div>}
-                <div className="taskList overflow-y-auto xl:h-[66vh] lg:h-[71vh] md:h-[73vh] sm:h-[87vh]">
-                    {todos.length == 0 && <div className='font-bold text-slate-600 text-lg dark:text-slate-200'>No tasks to display!</div>}
-                    {todos.map(item => {
-                        return (((showFinished || !item.isComplete) && (!showImportant || item.isImportant)) &&
-                            <div key={item.id} className="task flex justify-between rounded-md my-2 bg-white dark:bg-neutral-300">
-                                <div className={item.isComplete ? "line-through px-2 flex items-center" : "px-2 flex items-center"}>
-                                    <input name={item.id} onChange={handleCheckbox} className='mx-2' type="checkbox" checked={item.isComplete} />
-                                    <p>{item.todo}</p>
-                                </div>
-                                <div className="buttons flex items-center">
-                                    <small className='font-bold text-purple-600 mx-1 dark:text-neutral-900'>{item.date}</small>
-                                    <span onClick={(e) => handleImportant(e, item.id)} className='mx-2 cursor-pointer text-purple-600 dark:text-neutral-900'>{item.isImportant ? <BsStarFill /> : <BsStar />}</span>
-                                    <button onClick={(e) => handleEdit(e, item.id)} className="bg-purple-600 hover:bg-purple-700 px-3 py-2 text-white font-bold h-full dark:bg-neutral-900 dark:hover:bg-neutral-800"><FaEdit /></button>
-                                    <button onClick={(e) => handleDelete(e, item.id)} className="bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-r-md text-white font-bold h-full dark:bg-neutral-900 dark:hover:bg-neutral-800"><MdDelete /></button>
-                                </div>
-                            </div>
-                        )
-                    })}
+        <section className={`bg-purple-200 px-10 py-7 w-full flex flex-col dark:bg-neutral-700`}>
+            <article className="canvas h-full flex flex-col">
+                <div className="header">
+                    <h2 className='text-xl font-bold dark:text-white'>Your Tasks</h2>
+                    <hr className='bg-slate-500 border-slate-400 h-[2px] my-3 dark:border-2 dark:border-neutral-600' />
+                    {!(todos.length === 0) && <div>
+                        <input type="checkbox" onChange={toggleFinished} checked={showFinished} /> <span className='dark:text-white'>Show finished</span>
+                        <span className='border-2 border-purple-400 mx-3 dark:border-neutral-800'></span>
+                        <input type="checkbox" onChange={toggleImportant} checked={showImportant} /> <span className='dark:text-white'>Show only important</span>
+                    </div>}
                 </div>
-            </div>
+                <div className='taskList h-full overflow-y-auto my-2'>
+                    <div className="h-0 flex flex-col gap-2">
+                        {todos.length == 0 && <div className='font-bold text-slate-600 text-lg dark:text-slate-200'>No tasks to display!</div>}
+                        {todos.map(item => {
+                            return (((showFinished || !item.isComplete) && (!showImportant || item.isImportant)) &&
+                                <div key={item.id} className="task flex justify-between rounded-md bg-white dark:bg-neutral-300">
+                                    <div className={item.isComplete ? "line-through px-2 flex items-center" : "px-2 flex items-center"}>
+                                        <input name={item.id} onChange={handleCheckbox} className='mx-2' type="checkbox" checked={item.isComplete} />
+                                        <p>{item.todo}</p>
+                                    </div>
+                                    <div className="buttons flex items-center">
+                                        <small className='font-bold text-purple-600 mx-1 dark:text-neutral-900'>{item.date}</small>
+                                        <span onClick={(e) => handleImportant(e, item.id)} className='mx-2 cursor-pointer text-purple-600 dark:text-neutral-900'>{item.isImportant ? <BsStarFill /> : <BsStar />}</span>
+                                        <button onClick={(e) => handleEdit(e, item.id)} className="bg-purple-600 hover:bg-purple-700 px-3 py-2 text-white font-bold h-full dark:bg-neutral-900 dark:hover:bg-neutral-800"><FaEdit /></button>
+                                        <button onClick={(e) => handleDelete(e, item.id)} className="bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-r-md text-white font-bold h-full dark:bg-neutral-900 dark:hover:bg-neutral-800"><MdDelete /></button>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
 
-            <div className="addTask flex bg-white rounded-md">
-                <input onChange={(e) => { setTodo(e.target.value) }} value={todo} type="text" className='py-1 px-1 w-[100%] rounded-l-md text-lg text-slate-700 focus:outline-none dark:bg-neutral-300 dark:text-slate-900' placeholder='Type to add a task' />
-                <button onClick={handleAdd} disabled={todo.length <= 3} className="disabled:bg-purple-400 bg-purple-600 hover:bg-purple-700 px-4 py-1 text-white rounded-r-md font-bold dark:disabled:bg-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800">Add</button>
-            </div>
-        </div>
+                <div className="taskInput flex bg-white rounded-md mt-auto flex-shrink-0">
+                    <input onChange={(e) => { setTodo(e.target.value) }} value={todo} type="text" className='py-1 px-1 w-[100%] rounded-l-md text-lg text-slate-700 focus:outline-none dark:bg-neutral-300 dark:text-slate-900' placeholder='Type to add a task' />
+                    <button onClick={handleAdd} disabled={todo.length <= 3} className="disabled:bg-purple-400 bg-purple-600 hover:bg-purple-700 px-4 py-1 text-white rounded-r-md font-bold dark:disabled:bg-neutral-800 dark:bg-neutral-900 dark:hover:bg-neutral-800">Add</button>
+                </div>
+            </article>
+        </section>
     )
 }
 

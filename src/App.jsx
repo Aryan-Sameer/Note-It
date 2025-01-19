@@ -37,12 +37,12 @@ function App() {
     ])
 
     return (
-        <div className={`${darkMode ? "dark" : ""}`}>
+        <div className={`${darkMode ? "dark" : ""} flex flex-col h-svh`}>
             <ThemeContext.Provider value={{ darkMode, setDarkMode }}>
                 <nav className={`bg-purple-600 text-white py-[6px] dark:bg-neutral-950`}>
                     <span className='flex items-end text-[30px] mx-5 font-bold text-white-100 relative w-fit pointer-events-none select-none'>workFlo<span className='text-[40px] font-extrabold'><PiChecksBold /></span></span>
                 </nav>
-                <div className="main flex">
+                <div className="main flex flex-grow">
                     <RouterProvider router={routes} />
                 </div>
             </ThemeContext.Provider>
